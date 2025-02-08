@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 // React hooks are functions that let you use state and other React features in functional components
 
 const JobListing = ({job}:any) => {
-    console.log(job);
+    // console.log(job);
 
     const [showFullDescription, setShowFullDescription] = useState(false);
 
