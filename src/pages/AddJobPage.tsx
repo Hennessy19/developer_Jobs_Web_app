@@ -1,9 +1,42 @@
+import { useState } from "react";
+
 const AddJobPage = () => {
+
+  const [title, setTitle] = useState('');
+  const [type, setType] = useState('Full-Time');
+  const [description, setDescription] = useState('');
+  const [location, setLocation] = useState('');
+  const [salary, setSalary] = useState('Under $50K');
+  const [companyName, setCompanyName] = useState('');
+  const [companyDescription, setCompanyDescription] = useState('');
+  const [contactEmail, setContactEmail] = useState('');
+  const [contactPhone, setContactPhone] = useState('');
+
+  const submitForm = (e: React.FormEvent) => {
+    e.preventDefault();
+  
+      const newJob = {
+        title,
+        type,
+        description,
+        location,
+        salary,
+        company:{
+          companyName,
+          companyDescription,
+          contactEmail,
+          contactPhone
+        }
+      }
+
+      console.log(newJob)
+  };
+
   return (
     <section className="bg-indigo-50">
       <div className="container m-auto max-w-2xl py-24">
         <div className="bg-white px-6 py-8 mb-4 shadow-md rounded-md border m-4 md:m-0">
-          <form>
+          <form onSubmit={submitForm}>
             <h2 className="text-3xl text-center font-semibold mb-6">Add Job</h2>
 
             <div className="mb-4">
@@ -15,6 +48,9 @@ const AddJobPage = () => {
                 name="type"
                 className="border rounded w-full py-2 px-3"
                 required
+                value={type}
+                onChange={(e) => setType(e.target.value)} //the onChange event handler sets the value of the type state to the value of the selected option
+                
               >
                 <option value="Full-Time">Full-Time</option>
                 <option value="Part-Time">Part-Time</option>
@@ -34,6 +70,8 @@ const AddJobPage = () => {
                 className="border rounded w-full py-2 px-3 mb-2"
                 placeholder="eg. Beautiful Apartment In Miami"
                 required
+                value={title}
+                onChange={(e) => setTitle(e.target.value)} //the onChange event handler sets the value of the title state to the value of the input field
               />
             </div>
             <div className="mb-4">
@@ -49,6 +87,8 @@ const AddJobPage = () => {
                 className="border rounded w-full py-2 px-3"
                 rows={4}
                 placeholder="Add any job duties, expectations, requirements, etc"
+                value={description}
+                onChange={(e) => setDescription(e.target.value)} //the onChange event handler sets the value of the description state to the value of the textarea field
               ></textarea>
             </div>
 
@@ -61,6 +101,8 @@ const AddJobPage = () => {
                 name="salary"
                 className="border rounded w-full py-2 px-3"
                 required
+                value={salary}
+                onChange={(e) => setSalary(e.target.value)} //the onChange event handler sets the value of the salary state to the value of the selected option
               >
                 <option value="Under $50K">Under $50K</option>
                 <option value="$50K - 60K">$50K - $60K</option>
@@ -87,6 +129,8 @@ const AddJobPage = () => {
                 className="border rounded w-full py-2 px-3 mb-2"
                 placeholder="Company Location"
                 required
+                value={location}
+                onChange={(e) => setLocation(e.target.value)} //the onChange event handler sets the value of the location state to the value of the input field
               />
             </div>
 
@@ -105,6 +149,8 @@ const AddJobPage = () => {
                 name="company"
                 className="border rounded w-full py-2 px-3"
                 placeholder="Company Name"
+                value={companyName}
+                onChange={(e) => setCompanyName(e.target.value)} //the onChange event handler sets the value of the companyName state to the value of the input field
               />
             </div>
 
@@ -121,6 +167,8 @@ const AddJobPage = () => {
                 className="border rounded w-full py-2 px-3"
                 rows={4}
                 placeholder="What does your company do?"
+                value={companyDescription}
+                onChange={(e) => setCompanyDescription(e.target.value)} //the onChange event handler sets the value of the companyDescription state to the value of the textarea field
               ></textarea>
             </div>
 
@@ -138,6 +186,8 @@ const AddJobPage = () => {
                 className="border rounded w-full py-2 px-3"
                 placeholder="Email address for applicants"
                 required
+                value={contactEmail}
+                onChange={(e) => setContactEmail(e.target.value)} //the onChange event handler sets the value of the contactEmail state to the value of the input field
               />
             </div>
             <div className="mb-4">
@@ -153,6 +203,8 @@ const AddJobPage = () => {
                 name="contact_phone"
                 className="border rounded w-full py-2 px-3"
                 placeholder="Optional phone for applicants"
+                value={contactPhone}
+                onChange={(e) => setContactPhone(e.target.value)} //the onChange event handler sets the value of the contactPhone state to the value of the input field
               />
             </div>
 
