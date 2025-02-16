@@ -1,14 +1,27 @@
 import { useState, useEffect } from "react";
-import { useParams, useLoaderData } from "react-router-dom"; // useParams is a hook that allows us to access the URL parameters
+import { useParams, useLoaderData, useNavigate} from "react-router-dom"; // useParams is a hook that allows us to access the URL parameters
 import Spinner from "../components/Spinner";
 import { Link } from "react-router-dom";
 import { FaArrowLeft , FaMapMarker} from "react-icons/fa";
 
-const JobPage = () => {
+const JobPage = ({ deleteJob }:{deleteJob: Function}) => {
     const {id} = useParams();
     // const [job, setJob] = useState<any>(null);
     const [loading, setLoading] = useState(true);
     const job = useLoaderData();
+
+    const navigate = useNavigate();
+
+    const onDeleteClick = async (id: string) => {
+      const confirmDelete = window.confirm("Are you sure you want to delete this job?");
+      if (confirmDelete) {
+        await deleteJob(id);
+        return navigate('/jobs');
+        // window.location.href = "/jobs";
+      }
+      else {return};
+    
+    }
 
     // useEffect(() => {
 
@@ -115,6 +128,7 @@ const JobPage = () => {
                 >Edit Job</Link>
               <button
                 className="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded-full w-full focus:outline-none focus:shadow-outline mt-4 block"
+                onClick={() => onDeleteClick(job.id)}
               >
                 Delete Job
               </button>
