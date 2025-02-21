@@ -25,6 +25,7 @@
     "react-jobs": "file:",
     "react-router-dom": "^7.1.5",
     "react-spinners": "^0.15.0",
+    "react-toastify": "^11.0.3",
     "recharts": "^2.15.0",
     "tailwind-merge": "^2.6.0"
   },

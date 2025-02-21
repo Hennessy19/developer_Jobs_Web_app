@@ -3,6 +3,7 @@ import { useParams, useLoaderData, useNavigate} from "react-router-dom"; // useP
 import Spinner from "../components/Spinner";
 import { Link } from "react-router-dom";
 import { FaArrowLeft , FaMapMarker} from "react-icons/fa";
+import { toast } from "react-toastify";
 
 const JobPage = ({ deleteJob }:{deleteJob: Function}) => {
     const {id} = useParams();
@@ -13,13 +14,13 @@ const JobPage = ({ deleteJob }:{deleteJob: Function}) => {
     const navigate = useNavigate();
 
     const onDeleteClick = async (id: string) => {
-      const confirmDelete = window.confirm("Are you sure you want to delete this job?");
+      const confirmDelete = window.confirm("Are you sure you want to delete this job listing?");
       if (confirmDelete) {
         await deleteJob(id);
+        toast.success("Job deleted successfully");
         return navigate('/jobs');
-        // window.location.href = "/jobs";
       }
-      else {return};
+      else return;
     
     }
 
@@ -123,7 +124,7 @@ const JobPage = ({ deleteJob }:{deleteJob: Function}) => {
             <div className="bg-white p-6 rounded-lg shadow-md mt-6">
               <h3 className="text-xl font-bold mb-6">Manage Job</h3>
               <Link
-                to={`/jobs/edit/${job.id}`}
+                to={`/edit/jobs/${job.id}`}
                 className="bg-indigo-500 hover:bg-indigo-600 text-white text-center font-bold py-2 px-4 rounded-full w-full focus:outline-none focus:shadow-outline mt-4 block"
                 >Edit Job</Link>
               <button
